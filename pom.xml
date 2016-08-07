@@ -29,7 +29,12 @@
 		<dependency>
 			<groupId>de.domisum</groupId>
 			<artifactId>AuxiliumAPI</artifactId>
-			<version>0.0.34</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>de.domisum</groupId>
+			<artifactId>HologramAPI</artifactId>
+			<version>LATEST</version>
 		</dependency>
 	</dependencies>
 

@@ -27,7 +27,7 @@ public class HologramMenuAPI
 		onEnable();
 	}
 
-	public static void initialize(JavaPlugin plugin)
+	public static void enable(JavaPlugin plugin)
 	{
 		if(instance != null)
 			return;
@@ -47,7 +47,7 @@ public class HologramMenuAPI
 
 	protected void onEnable()
 	{
-		AuxiliumAPI.initialize(this.plugin);
+		AuxiliumAPI.enable(this.plugin);
 		this.hologramMenuManager = new HologramMenuManager();
 
 		new PlayerMovementListener();

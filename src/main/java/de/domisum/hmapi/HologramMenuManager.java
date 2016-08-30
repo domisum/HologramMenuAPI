@@ -1,29 +1,28 @@
 package de.domisum.hmapi;
 
-import java.util.Map;
-
+import de.domisum.auxiliumapi.data.structure.pds.PlayerKeyMap;
+import de.domisum.hmapi.menu.HologramMenu;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
-import de.domisum.auxiliumapi.data.structure.pds.PlayerKeyMap;
-import de.domisum.hmapi.menu.HologramMenu;
+import java.util.Map;
 
 public class HologramMenuManager
 {
 
 	// REFERENCES
-	protected Map<Player, HologramMenu> activeMenus = new PlayerKeyMap<>();
+	private Map<Player, HologramMenu> activeMenus = new PlayerKeyMap<>();
 
 
 	// -------
 	// CONSTRUCTOR
 	// -------
-	public HologramMenuManager()
+	HologramMenuManager()
 	{
 
 	}
 
-	public void terminate()
+	void terminate()
 	{
 		for(HologramMenu hm : this.activeMenus.values())
 			hm.terminate();
@@ -33,7 +32,7 @@ public class HologramMenuManager
 	// -------
 	// GETTERS
 	// -------
-	public boolean hasMenu(Player player)
+	boolean hasMenu(Player player)
 	{
 		return this.activeMenus.containsKey(player);
 	}
@@ -62,9 +61,10 @@ public class HologramMenuManager
 	// -------
 	// PLAYER MOVEMENT
 	// -------
-	public void playerMove(Player player, Location locationTo)
+	void playerMove(Player player, Location locationTo)
 	{
 		HologramMenu menu = this.activeMenus.get(player);
+
 		menu.updateLocation(locationTo);
 	}
 

@@ -1,24 +1,19 @@
 package de.domisum.hmapi.menu;
 
+import de.domisum.auxiliumapi.data.container.math.Vector3D;
+import de.domisum.auxiliumapi.util.bukkit.LocationUtil;
+import de.domisum.auxiliumapi.util.math.VectorUtil;
+import de.domisum.hmapi.HologramMenuAPI;
+import de.domisum.hmapi.component.HologramMenuComponent;
+import org.bukkit.Location;
+import org.bukkit.entity.Player;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.bukkit.Location;
-import org.bukkit.entity.Player;
-
-import de.domisum.auxiliumapi.data.container.math.Vector3D;
-import de.domisum.auxiliumapi.util.bukkit.LocationUtil;
-import de.domisum.auxiliumapi.util.math.MathUtil;
-import de.domisum.auxiliumapi.util.math.VectorUtil;
-import de.domisum.hmapi.HologramMenuAPI;
-import de.domisum.hmapi.component.HologramMenuComponent;
-
 public abstract class HologramMenu
 {
-
-	// CONSTANTS
-	protected static final float YAW_TOLERANCE = 50;
 
 	// REFERENCES
 	// <component, offset>
@@ -27,24 +22,19 @@ public abstract class HologramMenu
 	// y: upwards
 	// z: towards the player
 	protected Map<HologramMenuComponent, Vector3D> components = new HashMap<>();
-	protected Player player;
-
-	// PROPERTIES
-	protected double baseDistance = 3;
-	protected double baseHeight = 1.62;
+	private Player player;
 
 	// STATUS
-	protected Location location;
+	Location location;
 
 
 	// -------
 	// CONSTRUCTOR
 	// -------
-	public HologramMenu(Player player)
+	public HologramMenu(Player player, Location location)
 	{
 		this.player = player;
-
-		this.location = player.getLocation();
+		this.location = location;
 	}
 
 	/**
@@ -52,12 +42,14 @@ public abstract class HologramMenu
 	 */
 	protected void done()
 	{
+		HologramMenuAPI.getHologramMenuManager().register(this);
+
+		// this little offset is to make the method register a change and actually update the holograms
+		updateLocation(this.player.getLocation().add(0.1, 0, 0));
+
 		for(HologramMenuComponent hmc : this.components.keySet())
 			hmc.initialize(this.player);
 
-		HologramMenuAPI.getHologramMenuManager().register(this);
-		// this little offset is to make the method register a change and actually update the holograms
-		updateLocation(this.location.clone().add(0.01, 0, 0));
 		show();
 	}
 
@@ -76,22 +68,28 @@ public abstract class HologramMenu
 		return this.player;
 	}
 
-	protected Location getViewLocation()
+
+	protected Location getBaseLocation()
 	{
-		return this.location.clone().add(0, 1.62, 0);
+		return this.location;
+	}
+
+	private Location getViewLocation()
+	{
+		return this.player.getEyeLocation();
 	}
 
 
 	// -------
 	// VISIBILITY
 	// -------
-	protected void show()
+	private void show()
 	{
 		for(HologramMenuComponent hmc : this.components.keySet())
 			hmc.show();
 	}
 
-	protected void hide()
+	void hide()
 	{
 		for(HologramMenuComponent hmc : this.components.keySet())
 			hmc.hide();
@@ -104,50 +102,24 @@ public abstract class HologramMenu
 	public void updateLocation(Location newPlayerLocation)
 	{
 		boolean movement = !this.location.toVector().equals(newPlayerLocation.toVector());
+		if(!movement)
+			return;
 
-		this.location.setX(newPlayerLocation.getX());
-		this.location.setY(newPlayerLocation.getY());
-		this.location.setZ(newPlayerLocation.getZ());
+		// update the rotation of the menu to face the player
+		Location yawLocation = LocationUtil.lookAt(this.player.getLocation(), this.location);
+		this.location.setYaw(yawLocation.getYaw());
 
-		float newPlayerYaw = newPlayerLocation.getYaw() % 360;
-		if(newPlayerYaw < 0)
-			newPlayerYaw += 360;
-		float oldYaw = this.location.getYaw() % 360;
-		if(oldYaw < 0)
-			oldYaw += 360;
-
-		boolean rotation = !MathUtil.isAngleNearDeg(oldYaw, newPlayerYaw, YAW_TOLERANCE);
-		if(rotation)
-		{
-			double delta = newPlayerYaw - oldYaw;
-			float newYaw = 0;
-
-			if(delta < -180)
-				newYaw = newPlayerYaw - YAW_TOLERANCE;
-			else if((delta < 0) || (delta > 180))
-				newYaw = newPlayerYaw + YAW_TOLERANCE;
-			else
-				newYaw = newPlayerYaw - YAW_TOLERANCE;
-
-			newYaw %= 360;
-			if(newYaw < 0)
-				newYaw += 360;
-
-			this.location.setYaw(newYaw);
-		}
-
-		if(rotation || movement)
-			updateComponentLocations();
+		updateComponentLocations();
 	}
 
-	protected void updateComponentLocations()
+	void updateComponentLocations()
 	{
 		Location viewLocation = getViewLocation();
-		Location base = LocationUtil.moveLocationTowardsYaw(this.location, this.baseDistance).add(0, this.baseHeight, 0);
+		Location base = getBaseLocation();
 
 		for(Entry<HologramMenuComponent, Vector3D> entry : this.components.entrySet())
 		{
-			Vector3D offsetMc = convertOffsetToMinecraftCoordinates(entry.getValue());
+			Vector3D offsetMc = VectorUtil.convertOffsetToMinecraftCoordinates(entry.getValue());
 			Vector3D rotatedOffset = VectorUtil.rotateOnXZPlane(offsetMc, -this.location.getYaw());
 
 			Location componentLoc = base.clone().add(rotatedOffset.x, rotatedOffset.y, rotatedOffset.z);
@@ -155,15 +127,6 @@ public abstract class HologramMenu
 			entry.getKey().setLocation(new Vector3D(componentLoc));
 			entry.getKey().setViewLocation(new Vector3D(viewLocation));
 		}
-	}
-
-
-	// -------
-	// UTIL
-	// -------
-	protected static Vector3D convertOffsetToMinecraftCoordinates(Vector3D offset)
-	{
-		return new Vector3D(-offset.x, offset.y, -offset.z);
 	}
 
 }

@@ -1,17 +1,17 @@
 package de.domisum.hmapi;
 
-import java.util.logging.Logger;
-
-import org.bukkit.plugin.java.JavaPlugin;
-
 import de.domisum.auxiliumapi.AuxiliumAPI;
+import de.domisum.auxiliumapi.util.java.annotations.APIUsage;
+import org.bukkit.plugin.Plugin;
+
+import java.util.logging.Logger;
 
 public class HologramMenuAPI
 {
 
 	// REFERENCES
 	private static HologramMenuAPI instance;
-	private JavaPlugin plugin;
+	private Plugin plugin;
 
 	private HologramMenuManager hologramMenuManager;
 
@@ -19,7 +19,7 @@ public class HologramMenuAPI
 	// -------
 	// CONSTRUCTOR
 	// -------
-	protected HologramMenuAPI(JavaPlugin plugin)
+	private HologramMenuAPI(Plugin plugin)
 	{
 		instance = this;
 		this.plugin = plugin;
@@ -27,7 +27,8 @@ public class HologramMenuAPI
 		onEnable();
 	}
 
-	public static void enable(JavaPlugin plugin)
+	@APIUsage
+	public static void enable(Plugin plugin)
 	{
 		if(instance != null)
 			return;
@@ -35,6 +36,7 @@ public class HologramMenuAPI
 		new HologramMenuAPI(plugin);
 	}
 
+	@APIUsage
 	public static void disable()
 	{
 		if(instance == null)
@@ -45,33 +47,38 @@ public class HologramMenuAPI
 	}
 
 
-	protected void onEnable()
+	private void onEnable()
 	{
 		AuxiliumAPI.enable(this.plugin);
 		this.hologramMenuManager = new HologramMenuManager();
 
 		new PlayerMovementListener();
 
-		getLogger().info(this.getClass().getSimpleName() + " has been enabled");
+		getLogger().info(this.getClass().getSimpleName()+" has been enabled");
 	}
 
-	protected void onDisable()
+	private void onDisable()
 	{
 		this.hologramMenuManager.terminate();
 
-		getLogger().info(this.getClass().getSimpleName() + " has been disabled");
+		getLogger().info(this.getClass().getSimpleName()+" has been disabled");
 	}
 
 
 	// -------
 	// GETTERS
 	// -------
+	@APIUsage
 	public static HologramMenuAPI getInstance()
 	{
+		if(instance == null)
+			throw new IllegalArgumentException(HologramMenuAPI.class.getSimpleName()+" has to be initialized before usage");
+
 		return instance;
 	}
 
-	public static JavaPlugin getPlugin()
+	@APIUsage
+	public static Plugin getPlugin()
 	{
 		return getInstance().plugin;
 	}
@@ -81,7 +88,7 @@ public class HologramMenuAPI
 		return getInstance().hologramMenuManager;
 	}
 
-
+	@APIUsage
 	public Logger getLogger()
 	{
 		return getInstance().plugin.getLogger();

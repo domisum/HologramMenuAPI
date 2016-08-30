@@ -1,15 +1,15 @@
 package de.domisum.hmapi.test;
 
-import org.bukkit.Material;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.SkullMeta;
-
 import de.domisum.auxiliumapi.data.container.math.Vector3D;
 import de.domisum.hmapi.component.HologramMenuComponent;
 import de.domisum.hmapi.menu.HologramMenu;
 import de.domisum.hologramapi.hologram.TextHologram;
 import de.domisum.hologramapi.hologram.item.ItemHologram;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.SkullMeta;
 
 public class TestMenu extends HologramMenu
 {
@@ -19,16 +19,16 @@ public class TestMenu extends HologramMenu
 	// -------
 	public TestMenu(Player player)
 	{
-		super(player);
+		super(player, new Location(player.getWorld(), 174.5, 64.6, 60.5));
 
 		addComponents();
 
 		done();
 	}
 
-	protected void addComponents()
+	private void addComponents()
 	{
-		HologramMenuComponent hmc = null;
+		HologramMenuComponent hmc;
 
 		hmc = new HologramMenuComponent(new TextHologram("Ayy lmaou"));
 		this.components.put(hmc, new Vector3D(0, 0, 0));
@@ -47,10 +47,6 @@ public class TestMenu extends HologramMenu
 		ihg.setRotation(30);
 		hmc = new HologramMenuComponent(ihg);
 		this.components.put(hmc, new Vector3D(1, 0, 0));
-
-
-		// hmc = new HologramMenuComponent(new TextHologram("Links"));
-		// this.components.put(hmc, new Vector3D(-1, 0, 0));
 	}
 
 }

@@ -27,6 +27,8 @@ public abstract class HologramMenu
 	// STATUS
 	Location location;
 
+	private HologramMenuComponent hoveringComponent;
+
 
 	// -------
 	// CONSTRUCTOR
@@ -43,13 +45,11 @@ public abstract class HologramMenu
 	protected void done()
 	{
 		HologramMenuAPI.getHologramMenuManager().register(this);
-
-		// this little offset is to make the method register a change and actually update the holograms
-		updateLocation(this.player.getLocation().add(0.1, 0, 0));
-
 		for(HologramMenuComponent hmc : this.components.keySet())
 			hmc.initialize(this.player);
 
+		// this little offset is to make the method register a change and actually update the holograms
+		updateLocation(this.player.getLocation().add(0.1, 0, 0));
 		show();
 	}
 
@@ -81,6 +81,15 @@ public abstract class HologramMenu
 
 
 	// -------
+	// UPDATE
+	// -------
+	public void update()
+	{
+		updateHover();
+	}
+
+
+	// -------
 	// VISIBILITY
 	// -------
 	private void show()
@@ -102,19 +111,21 @@ public abstract class HologramMenu
 	public void updateLocation(Location newPlayerLocation)
 	{
 		boolean movement = !this.location.toVector().equals(newPlayerLocation.toVector());
-		if(!movement)
-			return;
+		if(movement)
+		{
+			// update the rotation of the menu to face the player
+			Location yawLocation = LocationUtil.lookAt(this.player.getLocation(), this.location);
+			this.location.setYaw(yawLocation.getYaw());
 
-		// update the rotation of the menu to face the player
-		Location yawLocation = LocationUtil.lookAt(this.player.getLocation(), this.location);
-		this.location.setYaw(yawLocation.getYaw());
+			updateComponentLocations();
+		}
 
-		updateComponentLocations();
+		updateHover();
 	}
 
 	void updateComponentLocations()
 	{
-		Location viewLocation = getViewLocation();
+		Location viewLocationBase = getViewLocation();
 		Location base = getBaseLocation();
 
 		for(Entry<HologramMenuComponent, Vector3D> entry : this.components.entrySet())
@@ -123,10 +134,60 @@ public abstract class HologramMenu
 			Vector3D rotatedOffset = VectorUtil.rotateOnXZPlane(offsetMc, -this.location.getYaw());
 
 			Location componentLoc = base.clone().add(rotatedOffset.x, rotatedOffset.y, rotatedOffset.z);
+			Location viewLocation = viewLocationBase.clone().add(rotatedOffset.x, rotatedOffset.y, rotatedOffset.z);
 
 			entry.getKey().setLocation(new Vector3D(componentLoc));
 			entry.getKey().setViewLocation(new Vector3D(viewLocation));
 		}
+	}
+
+
+	// -------
+	// INTERACTION
+	// -------
+	void updateHover()
+	{
+		if(this.hoveringComponent != null)
+			if(this.hoveringComponent.isPlayerLookingAt())
+				return;
+
+		for(HologramMenuComponent hmc : this.components.keySet())
+			if(hmc.isPlayerLookingAt())
+			{
+				if(this.hoveringComponent != null)
+					this.hoveringComponent.onDehover();
+
+				this.hoveringComponent = hmc;
+				hmc.onHover();
+				return;
+			}
+
+		if(this.hoveringComponent != null)
+		{
+			this.hoveringComponent.onDehover();
+			this.hoveringComponent = null;
+		}
+	}
+
+	public void click(boolean left)
+	{
+		if(!left)
+		{
+			onRightClick();
+			return;
+		}
+
+		updateHover();
+
+		if(this.hoveringComponent == null)
+			return;
+
+		this.hoveringComponent.onClick();
+	}
+
+	protected void onRightClick()
+	{
+
 	}
 
 }

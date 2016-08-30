@@ -103,6 +103,8 @@ public abstract class PlayerCenteredHologramMenu extends HologramMenu
 
 		if(rotation || movement)
 			updateComponentLocations();
+
+		updateHover();
 	}
 
 }

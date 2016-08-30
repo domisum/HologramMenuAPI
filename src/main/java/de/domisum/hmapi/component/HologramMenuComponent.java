@@ -1,20 +1,22 @@
 package de.domisum.hmapi.component;
 
-import org.bukkit.entity.Player;
-
+import de.domisum.auxiliumapi.data.container.math.LineSegment3D;
 import de.domisum.auxiliumapi.data.container.math.Vector3D;
+import de.domisum.auxiliumapi.util.DebugUtil;
+import de.domisum.auxiliumapi.util.math.VectorUtil;
 import de.domisum.hologramapi.hologram.Hologram;
+import de.domisum.hologramapi.hologram.TextHologram;
+import org.bukkit.entity.Player;
 
 public class HologramMenuComponent
 {
 
 	// REFERENCES
 	protected Hologram hologram;
-	protected Player player;
+	private Player player;
 
 	// STATUS
-	protected Vector3D location;
-	protected Vector3D viewLocation;
+	private Vector3D location;
 
 
 	// -------
@@ -57,8 +59,65 @@ public class HologramMenuComponent
 
 	public void setViewLocation(Vector3D viewLocation)
 	{
-		this.viewLocation = viewLocation;
-		this.hologram.setViewLocation(this.viewLocation);
+		this.hologram.setViewLocation(viewLocation);
+	}
+
+
+	// -------
+	// INTERACTION
+	// -------
+	public void onHover()
+	{
+
+	}
+
+	public void onDehover()
+	{
+
+	}
+
+	public void onClick()
+	{
+		DebugUtil.say("click");
+	}
+
+	public boolean isPlayerLookingAt()
+	{
+		Vector3D playerEyeLocation = new Vector3D(this.player.getEyeLocation());
+		Vector3D lookDirection = new Vector3D(this.player.getLocation().getDirection());
+		Vector3D playerLookLocation = playerEyeLocation.add(lookDirection.multiply(100));
+		LineSegment3D playerLookLineSegment = new LineSegment3D(playerEyeLocation, playerLookLocation);
+
+		if(this.hologram instanceof TextHologram)
+		{
+			TextHologram textHologram = (TextHologram) this.hologram;
+			LineSegment3D hologramLineSegment = getTextHologramLineSegment(textHologram);
+
+			return playerLookLineSegment.getDistanceTo(hologramLineSegment) < 0.15;
+		}
+
+		return playerLookLineSegment.getDistanceTo(this.location) < 0.25;
+	}
+
+
+	// -------
+	// UTIL
+	// -------
+	private LineSegment3D getTextHologramLineSegment(TextHologram hologram)
+	{
+		Vector3D offset = new Vector3D(hologram.getWidth()/2, 0, 0);
+		offset = VectorUtil.convertOffsetToMinecraftCoordinates(offset);
+
+		/*Location yawLocation = LocationUtil
+				.lookAt(this.player.getEyeLocation(), this.location.toLocation(this.player.getWorld()));
+		double rotationYaw = -yawLocation.getYaw();*/
+
+		// the text hologram's rotation actually just depends on the player's yaw, since it is always parallel to the screen,
+		// so just use the player yaw for the rotation
+		double rotationYaw = -this.player.getLocation().getYaw();
+		Vector3D rotatedOffset = VectorUtil.rotateOnXZPlane(offset, rotationYaw);
+
+		return new LineSegment3D(this.location.add(rotatedOffset.invert()), this.location.add(rotatedOffset));
 	}
 
 }

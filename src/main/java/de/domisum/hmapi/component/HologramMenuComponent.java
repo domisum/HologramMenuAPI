@@ -13,7 +13,7 @@ public class HologramMenuComponent
 
 	// REFERENCES
 	protected Hologram hologram;
-	private Player player;
+	protected Player player;
 
 	// STATUS
 	private Vector3D location;

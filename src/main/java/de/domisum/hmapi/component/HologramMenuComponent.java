@@ -2,7 +2,6 @@ package de.domisum.hmapi.component;
 
 import de.domisum.auxiliumapi.data.container.math.LineSegment3D;
 import de.domisum.auxiliumapi.data.container.math.Vector3D;
-import de.domisum.auxiliumapi.util.DebugUtil;
 import de.domisum.auxiliumapi.util.math.VectorUtil;
 import de.domisum.hologramapi.hologram.Hologram;
 import de.domisum.hologramapi.hologram.TextHologram;
@@ -25,6 +24,11 @@ public class HologramMenuComponent
 	public HologramMenuComponent(Hologram hologram)
 	{
 		this.hologram = hologram;
+	}
+
+	public String toString()
+	{
+		return "hmc["+this.hologram.getClass().getSimpleName()+"]";
 	}
 
 	public void initialize(Player player)
@@ -78,7 +82,7 @@ public class HologramMenuComponent
 
 	public void onClick()
 	{
-		DebugUtil.say("click");
+
 	}
 
 	public boolean isPlayerLookingAt()

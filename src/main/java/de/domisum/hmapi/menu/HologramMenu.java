@@ -48,8 +48,7 @@ public abstract class HologramMenu
 		for(HologramMenuComponent hmc : this.components.keySet())
 			hmc.initialize(this.player);
 
-		// this little offset is to make the method register a change and actually update the holograms
-		updateLocation(this.player.getLocation().add(0.1, 0, 0));
+		updateLocation(null);
 		show();
 	}
 
@@ -71,7 +70,7 @@ public abstract class HologramMenu
 
 	protected Location getBaseLocation()
 	{
-		return this.location;
+		return this.location.clone();
 	}
 
 	private Location getViewLocation()
@@ -85,7 +84,7 @@ public abstract class HologramMenu
 	// -------
 	public void update()
 	{
-		updateHover();
+		updateLocation(null);
 	}
 
 
@@ -108,18 +107,16 @@ public abstract class HologramMenu
 	// -------
 	// MOVEMENT
 	// -------
-	public void updateLocation(Location newPlayerLocation)
+	public void updateLocation(Location newLocation)
 	{
-		boolean movement = !this.location.toVector().equals(newPlayerLocation.toVector());
-		if(movement)
-		{
-			// update the rotation of the menu to face the player
-			Location yawLocation = LocationUtil.lookAt(this.player.getLocation(), this.location);
-			this.location.setYaw(yawLocation.getYaw());
+		if(newLocation != null)
+			this.location = newLocation.clone();
 
-			updateComponentLocations();
-		}
+		// update the rotation of the menu to face the player
+		Location yawLocation = LocationUtil.lookAt(this.player.getLocation(), this.location);
+		this.location.setYaw(yawLocation.getYaw());
 
+		updateComponentLocations();
 		updateHover();
 	}
 
@@ -130,8 +127,9 @@ public abstract class HologramMenu
 
 		for(Entry<HologramMenuComponent, Vector3D> entry : this.components.entrySet())
 		{
+			float rotationYaw = -base.getYaw();
 			Vector3D offsetMc = VectorUtil.convertOffsetToMinecraftCoordinates(entry.getValue());
-			Vector3D rotatedOffset = VectorUtil.rotateOnXZPlane(offsetMc, -this.location.getYaw());
+			Vector3D rotatedOffset = VectorUtil.rotateOnXZPlane(offsetMc, rotationYaw);
 
 			Location componentLoc = base.clone().add(rotatedOffset.x, rotatedOffset.y, rotatedOffset.z);
 			Location viewLocation = viewLocationBase.clone().add(rotatedOffset.x, rotatedOffset.y, rotatedOffset.z);

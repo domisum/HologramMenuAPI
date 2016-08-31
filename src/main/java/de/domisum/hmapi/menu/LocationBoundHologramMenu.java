@@ -23,9 +23,6 @@ public class LocationBoundHologramMenu extends HologramMenu
 	@APIUsage
 	public void setLocation(Location location)
 	{
-		this.location = location;
-
-		updateComponentLocations();
-		updateHover();
+		updateLocation(location);
 	}
 }

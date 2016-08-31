@@ -3,7 +3,7 @@ package de.domisum.hmapi.test;
 import de.domisum.auxiliumapi.data.container.math.Vector3D;
 import de.domisum.auxiliumapi.util.bukkit.ItemStackBuilder;
 import de.domisum.hmapi.component.HologramMenuComponent;
-import de.domisum.hmapi.menu.HologramMenu;
+import de.domisum.hmapi.menu.LocationBoundHologramMenu;
 import de.domisum.hologramapi.hologram.TextHologram;
 import de.domisum.hologramapi.hologram.item.ItemHologram;
 import org.bukkit.ChatColor;
@@ -12,7 +12,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-public class TestMenu extends HologramMenu
+public class TestMenu extends LocationBoundHologramMenu
 {
 
 	// -------
@@ -35,7 +35,7 @@ public class TestMenu extends HologramMenu
 		HologramMenuComponent hmc;
 
 		ItemHologram ihg = new ItemHologram(is);
-		ihg.setRotation(-30);
+		ihg.setRotation(-0);
 		hmc = new HologramMenuComponent(ihg)
 		{
 			@Override
@@ -71,7 +71,7 @@ public class TestMenu extends HologramMenu
 		this.components.put(hmc, new Vector3D(0, 0, 0));
 
 		ihg = new ItemHologram(is);
-		ihg.setRotation(30);
+		ihg.setRotation(0);
 		hmc = new HologramMenuComponent(ihg)
 		{
 			@Override

@@ -3,7 +3,6 @@ package de.domisum.hmapi;
 import de.domisum.auxiliumapi.data.structure.pds.PlayerKeyMap;
 import de.domisum.hmapi.menu.HologramMenu;
 import org.bukkit.Bukkit;
-import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitTask;
 
@@ -100,12 +99,6 @@ public class HologramMenuManager
 	// -------
 	// PLAYER INTERACTION
 	// -------
-	void playerMove(Player player, Location locationTo)
-	{
-		HologramMenu menu = this.activeMenus.get(player);
-		menu.updateLocation(locationTo);
-	}
-
 	void playerClick(Player player, boolean left)
 	{
 		HologramMenu menu = this.activeMenus.get(player);

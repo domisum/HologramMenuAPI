@@ -1,10 +1,11 @@
-package de.domisum.hmapi.component;
+package de.domisum.lib.hologrammenu.component;
 
-import de.domisum.auxiliumapi.data.container.math.LineSegment3D;
-import de.domisum.auxiliumapi.data.container.math.Vector3D;
-import de.domisum.auxiliumapi.util.math.VectorUtil;
-import de.domisum.hologramapi.hologram.Hologram;
-import de.domisum.hologramapi.hologram.TextHologram;
+
+import de.domisum.lib.auxilium.data.container.math.LineSegment3D;
+import de.domisum.lib.auxilium.data.container.math.Vector3D;
+import de.domisum.lib.auxilium.util.math.VectorUtil;
+import de.domisum.lib.hologram.hologram.Hologram;
+import de.domisum.lib.hologram.hologram.TextHologram;
 import org.bukkit.entity.Player;
 
 public class HologramMenuComponent

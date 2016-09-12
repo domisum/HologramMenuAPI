@@ -1,11 +1,12 @@
-package de.domisum.hmapi.test;
+package de.domisum.lib.hologrammenu.test;
 
-import de.domisum.auxiliumapi.data.container.math.Vector3D;
-import de.domisum.auxiliumapi.util.bukkit.ItemStackBuilder;
-import de.domisum.hmapi.component.HologramMenuComponent;
-import de.domisum.hmapi.menu.LocationBoundHologramMenu;
-import de.domisum.hologramapi.hologram.TextHologram;
-import de.domisum.hologramapi.hologram.item.ItemHologram;
+
+import de.domisum.lib.auxilium.data.container.math.Vector3D;
+import de.domisum.lib.auxilium.util.bukkit.ItemStackBuilder;
+import de.domisum.lib.hologram.hologram.TextHologram;
+import de.domisum.lib.hologram.hologram.item.ItemHologram;
+import de.domisum.lib.hologrammenu.component.HologramMenuComponent;
+import de.domisum.lib.hologrammenu.menu.LocationBoundHologramMenu;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;

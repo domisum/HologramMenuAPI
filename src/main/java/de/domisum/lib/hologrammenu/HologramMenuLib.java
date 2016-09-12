@@ -1,16 +1,16 @@
-package de.domisum.hmapi;
+package de.domisum.lib.hologrammenu;
 
-import de.domisum.auxiliumapi.AuxiliumAPI;
-import de.domisum.auxiliumapi.util.java.annotations.APIUsage;
+import de.domisum.lib.auxilium.AuxiliumLib;
+import de.domisum.lib.auxilium.util.java.annotations.APIUsage;
 import org.bukkit.plugin.Plugin;
 
 import java.util.logging.Logger;
 
-public class HologramMenuAPI
+public class HologramMenuLib
 {
 
 	// REFERENCES
-	private static HologramMenuAPI instance;
+	private static HologramMenuLib instance;
 	private Plugin plugin;
 
 	private HologramMenuManager hologramMenuManager;
@@ -19,7 +19,7 @@ public class HologramMenuAPI
 	// -------
 	// CONSTRUCTOR
 	// -------
-	private HologramMenuAPI(Plugin plugin)
+	private HologramMenuLib(Plugin plugin)
 	{
 		instance = this;
 		this.plugin = plugin;
@@ -33,7 +33,7 @@ public class HologramMenuAPI
 		if(instance != null)
 			return;
 
-		new HologramMenuAPI(plugin);
+		new HologramMenuLib(plugin);
 	}
 
 	@APIUsage
@@ -49,7 +49,7 @@ public class HologramMenuAPI
 
 	private void onEnable()
 	{
-		AuxiliumAPI.enable(this.plugin);
+		AuxiliumLib.enable(this.plugin);
 		this.hologramMenuManager = new HologramMenuManager();
 
 		new PlayerMovementListener();
@@ -69,10 +69,10 @@ public class HologramMenuAPI
 	// GETTERS
 	// -------
 	@APIUsage
-	public static HologramMenuAPI getInstance()
+	public static HologramMenuLib getInstance()
 	{
 		if(instance == null)
-			throw new IllegalArgumentException(HologramMenuAPI.class.getSimpleName()+" has to be initialized before usage");
+			throw new IllegalArgumentException(HologramMenuLib.class.getSimpleName()+" has to be initialized before usage");
 
 		return instance;
 	}

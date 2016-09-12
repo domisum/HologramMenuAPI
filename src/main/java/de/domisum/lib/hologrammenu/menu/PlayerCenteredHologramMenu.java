@@ -1,9 +1,10 @@
-package de.domisum.hmapi.menu;
+package de.domisum.lib.hologrammenu.menu;
 
-import de.domisum.auxiliumapi.util.bukkit.LocationUtil;
-import de.domisum.auxiliumapi.util.java.annotations.APIUsage;
-import de.domisum.auxiliumapi.util.math.MathUtil;
-import de.domisum.hmapi.HologramMenuAPI;
+
+import de.domisum.lib.auxilium.util.bukkit.LocationUtil;
+import de.domisum.lib.auxilium.util.java.annotations.APIUsage;
+import de.domisum.lib.auxilium.util.math.MathUtil;
+import de.domisum.lib.hologrammenu.HologramMenuLib;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
@@ -31,7 +32,7 @@ public abstract class PlayerCenteredHologramMenu extends HologramMenu
 	@Override
 	public void terminate()
 	{
-		HologramMenuAPI.getHologramMenuManager().unregister(this);
+		HologramMenuLib.getHologramMenuManager().unregister(this);
 		hide();
 	}
 

@@ -1,10 +1,11 @@
-package de.domisum.hmapi.menu;
+package de.domisum.lib.hologrammenu.menu;
 
-import de.domisum.auxiliumapi.data.container.math.Vector3D;
-import de.domisum.auxiliumapi.util.bukkit.LocationUtil;
-import de.domisum.auxiliumapi.util.math.VectorUtil;
-import de.domisum.hmapi.HologramMenuAPI;
-import de.domisum.hmapi.component.HologramMenuComponent;
+
+import de.domisum.lib.auxilium.data.container.math.Vector3D;
+import de.domisum.lib.auxilium.util.bukkit.LocationUtil;
+import de.domisum.lib.auxilium.util.math.VectorUtil;
+import de.domisum.lib.hologrammenu.HologramMenuLib;
+import de.domisum.lib.hologrammenu.component.HologramMenuComponent;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
@@ -44,7 +45,7 @@ public abstract class HologramMenu
 	 */
 	protected void done()
 	{
-		HologramMenuAPI.getHologramMenuManager().register(this);
+		HologramMenuLib.getHologramMenuManager().register(this);
 		for(HologramMenuComponent hmc : this.components.keySet())
 			hmc.initialize(this.player);
 
@@ -54,7 +55,7 @@ public abstract class HologramMenu
 
 	public void terminate()
 	{
-		HologramMenuAPI.getHologramMenuManager().unregister(this);
+		HologramMenuLib.getHologramMenuManager().unregister(this);
 		hide();
 	}
 

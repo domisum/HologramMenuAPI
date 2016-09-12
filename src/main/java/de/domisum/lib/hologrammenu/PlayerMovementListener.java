@@ -1,4 +1,4 @@
-package de.domisum.hmapi;
+package de.domisum.lib.hologrammenu;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -20,7 +20,7 @@ public class PlayerMovementListener implements Listener
 
 	private void registerListener()
 	{
-		Plugin plugin = HologramMenuAPI.getPlugin();
+		Plugin plugin = HologramMenuLib.getPlugin();
 		plugin.getServer().getPluginManager().registerEvents(this, plugin);
 	}
 
@@ -35,10 +35,10 @@ public class PlayerMovementListener implements Listener
 			return;
 
 		Player player = event.getPlayer();
-		if(!HologramMenuAPI.getHologramMenuManager().hasMenu(player))
+		if(!HologramMenuLib.getHologramMenuManager().hasMenu(player))
 			return;
 
-		HologramMenuAPI.getHologramMenuManager()
+		HologramMenuLib.getHologramMenuManager()
 				.playerClick(player, event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK);
 	}
 

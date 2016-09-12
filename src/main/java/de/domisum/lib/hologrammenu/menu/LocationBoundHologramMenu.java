@@ -1,6 +1,6 @@
-package de.domisum.hmapi.menu;
+package de.domisum.lib.hologrammenu.menu;
 
-import de.domisum.auxiliumapi.util.java.annotations.APIUsage;
+import de.domisum.lib.auxilium.util.java.annotations.APIUsage;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 

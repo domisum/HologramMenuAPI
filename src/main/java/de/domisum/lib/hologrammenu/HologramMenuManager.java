@@ -1,7 +1,7 @@
-package de.domisum.hmapi;
+package de.domisum.lib.hologrammenu;
 
-import de.domisum.auxiliumapi.data.structure.pds.PlayerKeyMap;
-import de.domisum.hmapi.menu.HologramMenu;
+import de.domisum.lib.auxilium.data.structure.pds.PlayerKeyMap;
+import de.domisum.lib.hologrammenu.menu.HologramMenu;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitTask;
@@ -77,7 +77,7 @@ public class HologramMenuManager
 		if(this.updateTask != null)
 			return;
 
-		this.updateTask = Bukkit.getScheduler().runTaskTimer(HologramMenuAPI.getPlugin(), this::update, 1, 1);
+		this.updateTask = Bukkit.getScheduler().runTaskTimer(HologramMenuLib.getPlugin(), this::update, 1, 1);
 	}
 
 	private void stopUpdateTask()

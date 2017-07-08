@@ -65,17 +65,17 @@ public class HologramMenuComponent
 	// INTERACTION
 	public void onHover()
 	{
-
+		// to be overridden
 	}
 
 	public void onDehover()
 	{
-
+		// to be overridden
 	}
 
 	public void onClick()
 	{
-
+		// to be overridden
 	}
 
 	public boolean isPlayerLookingAt()

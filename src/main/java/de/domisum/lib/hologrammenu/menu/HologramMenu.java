@@ -31,9 +31,7 @@ public abstract class HologramMenu
 	private HologramMenuComponent hoveringComponent;
 
 
-	// -------
-	// CONSTRUCTOR
-	// -------
+	// INIT
 	public HologramMenu(Player player, Location location)
 	{
 		this.player = player;
@@ -60,9 +58,7 @@ public abstract class HologramMenu
 	}
 
 
-	// -------
 	// GETTERS
-	// -------
 	public Player getPlayer()
 	{
 		return this.player;
@@ -80,18 +76,14 @@ public abstract class HologramMenu
 	}
 
 
-	// -------
 	// UPDATE
-	// -------
 	public void update()
 	{
 		updateLocation(null);
 	}
 
 
-	// -------
 	// VISIBILITY
-	// -------
 	private void show()
 	{
 		for(HologramMenuComponent hmc : this.components.keySet())
@@ -105,9 +97,7 @@ public abstract class HologramMenu
 	}
 
 
-	// -------
 	// MOVEMENT
-	// -------
 	public void updateLocation(Location newLocation)
 	{
 		if(newLocation != null)
@@ -141,9 +131,7 @@ public abstract class HologramMenu
 	}
 
 
-	// -------
 	// INTERACTION
-	// -------
 	void updateHover()
 	{
 		if(this.hoveringComponent != null)

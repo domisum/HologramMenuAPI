@@ -8,20 +8,15 @@ import org.bukkit.entity.Player;
 public class LocationBoundHologramMenu extends HologramMenu
 {
 
-	// -------
-	// CONSTRUCTOR
-	// -------
+	// INIT
 	public LocationBoundHologramMenu(Player player, Location location)
 	{
 		super(player, location);
 	}
 
 
-	// -------
 	// SETTERS
-	// -------
-	@APIUsage
-	public void setLocation(Location location)
+	@APIUsage public void setLocation(Location location)
 	{
 		updateLocation(location);
 	}

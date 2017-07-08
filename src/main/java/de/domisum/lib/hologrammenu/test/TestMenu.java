@@ -16,9 +16,7 @@ import org.bukkit.inventory.ItemStack;
 public class TestMenu extends LocationBoundHologramMenu
 {
 
-	// -------
-	// CONSTRUCTOR
-	// -------
+	// INIT
 	public TestMenu(Player player)
 	{
 		super(player, new Location(player.getWorld(), 174.5, 64.6, 60.5));
@@ -39,14 +37,12 @@ public class TestMenu extends LocationBoundHologramMenu
 		ihg.setRotation(-0);
 		hmc = new HologramMenuComponent(ihg)
 		{
-			@Override
-			public void onHover()
+			@Override public void onHover()
 			{
 				((ItemHologram) this.hologram).setItemStack(new ItemStack(Material.PUMPKIN));
 			}
 
-			@Override
-			public void onDehover()
+			@Override public void onDehover()
 			{
 				((ItemHologram) this.hologram).setItemStack(new ItemStack(Material.GRASS));
 			}
@@ -55,15 +51,13 @@ public class TestMenu extends LocationBoundHologramMenu
 
 		hmc = new HologramMenuComponent(new TextHologram("Ayy lmao, memes are gr8"))
 		{
-			@Override
-			public void onHover()
+			@Override public void onHover()
 			{
 				TextHologram textHologram = (TextHologram) this.hologram;
 				textHologram.setText(ChatColor.GOLD+textHologram.getText());
 			}
 
-			@Override
-			public void onDehover()
+			@Override public void onDehover()
 			{
 				TextHologram textHologram = (TextHologram) this.hologram;
 				textHologram.setText(ChatColor.stripColor(textHologram.getText()));
@@ -75,14 +69,12 @@ public class TestMenu extends LocationBoundHologramMenu
 		ihg.setRotation(0);
 		hmc = new HologramMenuComponent(ihg)
 		{
-			@Override
-			public void onHover()
+			@Override public void onHover()
 			{
 				((ItemHologram) this.hologram).setItemStack(new ItemStack(Material.PUMPKIN));
 			}
 
-			@Override
-			public void onDehover()
+			@Override public void onDehover()
 			{
 				((ItemHologram) this.hologram).setItemStack(new ItemStack(Material.GRASS));
 			}

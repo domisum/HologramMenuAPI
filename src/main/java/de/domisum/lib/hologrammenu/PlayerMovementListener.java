@@ -10,9 +10,7 @@ import org.bukkit.plugin.Plugin;
 public class PlayerMovementListener implements Listener
 {
 
-	// -------
-	// CONSTRUCTOR
-	// -------
+	// INIT
 	public PlayerMovementListener()
 	{
 		registerListener();
@@ -25,11 +23,8 @@ public class PlayerMovementListener implements Listener
 	}
 
 
-	// -------
 	// EVENTS
-	// -------
-	@EventHandler
-	public void playerClick(PlayerInteractEvent event)
+	@EventHandler public void playerClick(PlayerInteractEvent event)
 	{
 		if(event.getAction() == Action.PHYSICAL)
 			return;

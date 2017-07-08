@@ -19,9 +19,7 @@ public class HologramMenuComponent
 	private Vector3D location;
 
 
-	// -------
-	// CONSTRUCTOR
-	// -------
+	// INIT
 	public HologramMenuComponent(Hologram hologram)
 	{
 		this.hologram = hologram;
@@ -39,9 +37,7 @@ public class HologramMenuComponent
 	}
 
 
-	// -------
 	// VISIBILITY
-	// -------
 	public void show()
 	{
 		this.hologram.showTo(this.player);
@@ -53,9 +49,7 @@ public class HologramMenuComponent
 	}
 
 
-	// -------
 	// MOVEMENT
-	// -------
 	public void setLocation(Vector3D location)
 	{
 		this.location = location;
@@ -68,9 +62,7 @@ public class HologramMenuComponent
 	}
 
 
-	// -------
 	// INTERACTION
-	// -------
 	public void onHover()
 	{
 
@@ -105,9 +97,7 @@ public class HologramMenuComponent
 	}
 
 
-	// -------
 	// UTIL
-	// -------
 	private LineSegment3D getTextHologramLineSegment(TextHologram hologram)
 	{
 		Vector3D offset = new Vector3D(hologram.getWidth()/2, 0, 0);

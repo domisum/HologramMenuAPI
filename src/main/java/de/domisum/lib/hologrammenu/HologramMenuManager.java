@@ -18,9 +18,7 @@ public class HologramMenuManager
 	private BukkitTask updateTask;
 
 
-	// -------
-	// CONSTRUCTOR
-	// -------
+	// INIT
 	HologramMenuManager()
 	{
 
@@ -35,18 +33,14 @@ public class HologramMenuManager
 	}
 
 
-	// -------
 	// GETTERS
-	// -------
 	boolean hasMenu(Player player)
 	{
 		return this.activeMenus.containsKey(player);
 	}
 
 
-	// -------
 	// REGISTRATION
-	// -------
 	public void register(HologramMenu menu)
 	{
 		if(this.activeMenus.containsKey(menu.getPlayer()))
@@ -69,9 +63,7 @@ public class HologramMenuManager
 	}
 
 
-	// -------
 	// UPDATE
-	// -------
 	private void startUpdateTask()
 	{
 		if(this.updateTask != null)
@@ -96,9 +88,7 @@ public class HologramMenuManager
 	}
 
 
-	// -------
 	// PLAYER INTERACTION
-	// -------
 	void playerClick(Player player, boolean left)
 	{
 		HologramMenu menu = this.activeMenus.get(player);

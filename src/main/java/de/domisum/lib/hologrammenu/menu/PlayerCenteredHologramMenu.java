@@ -20,54 +20,40 @@ public abstract class PlayerCenteredHologramMenu extends HologramMenu
 	private double baseHeight = 1.62;
 
 
-	// -------
-	// CONSTRUCTOR
-	// -------
-	@APIUsage
-	public PlayerCenteredHologramMenu(Player player)
+	// INIT
+	@APIUsage public PlayerCenteredHologramMenu(Player player)
 	{
 		super(player, player.getLocation());
 	}
 
-	@Override
-	public void terminate()
+	@Override public void terminate()
 	{
 		HologramMenuLib.getHologramMenuManager().unregister(this);
 		hide();
 	}
 
 
-	// -------
 	// GETTERS
-	// -------
-	@Override
-	protected Location getBaseLocation()
+	@Override protected Location getBaseLocation()
 	{
 		return LocationUtil.moveLocationTowardsYaw(this.location, this.baseDistance).add(0, this.baseHeight, 0);
 	}
 
 
-	// -------
 	// SETTERS
-	// -------
-	@APIUsage
-	public void setBaseDistance(double baseDistance)
+	@APIUsage public void setBaseDistance(double baseDistance)
 	{
 		this.baseDistance = baseDistance;
 	}
 
-	@APIUsage
-	public void setBaseHeight(double baseHeight)
+	@APIUsage public void setBaseHeight(double baseHeight)
 	{
 		this.baseHeight = baseHeight;
 	}
 
 
-	// -------
 	// MOVEMENT
-	// -------
-	@Override
-	public void updateLocation(Location newPlayerLocation)
+	@Override public void updateLocation(Location newPlayerLocation)
 	{
 		boolean movement = !this.location.toVector().equals(newPlayerLocation.toVector());
 

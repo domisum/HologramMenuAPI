@@ -1,6 +1,7 @@
 package de.domisum.lib.hologrammenu.menu;
 
 import de.domisum.lib.auxilium.data.container.math.Vector3D;
+import de.domisum.lib.auxilium.util.java.annotations.APIUsage;
 import de.domisum.lib.auxilium.util.math.VectorUtil;
 import de.domisum.lib.auxiliumspigot.data.container.VectorConverter;
 import de.domisum.lib.auxiliumspigot.util.LocationUtil;
@@ -26,7 +27,7 @@ public abstract class HologramMenu
 	private Player player;
 
 	// STATUS
-	Location location;
+	protected Location location;
 
 	private HologramMenuComponent hoveringComponent;
 
@@ -90,7 +91,7 @@ public abstract class HologramMenu
 			hmc.show();
 	}
 
-	void hide()
+	protected void hide()
 	{
 		for(HologramMenuComponent hmc : this.components.keySet())
 			hmc.hide();
@@ -111,7 +112,7 @@ public abstract class HologramMenu
 		updateHover();
 	}
 
-	void updateComponentLocations()
+	protected void updateComponentLocations()
 	{
 		Location viewLocationBase = getViewLocation();
 		Location base = getBaseLocation();
@@ -172,9 +173,9 @@ public abstract class HologramMenu
 		this.hoveringComponent.onClick();
 	}
 
-	protected void onRightClick()
+	@APIUsage protected void onRightClick()
 	{
-
+		// to be overridden
 	}
 
 }

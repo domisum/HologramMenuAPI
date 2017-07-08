@@ -1,6 +1,5 @@
 package de.domisum.lib.hologrammenu;
 
-import de.domisum.lib.auxilium.AuxiliumLib;
 import de.domisum.lib.auxilium.util.java.annotations.APIUsage;
 import org.bukkit.plugin.Plugin;
 
@@ -45,7 +44,6 @@ public class HologramMenuLib
 
 	private void onEnable()
 	{
-		AuxiliumLib.enable(this.plugin);
 		this.hologramMenuManager = new HologramMenuManager();
 
 		new PlayerMovementListener();

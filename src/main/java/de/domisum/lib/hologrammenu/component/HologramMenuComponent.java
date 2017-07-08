@@ -1,9 +1,9 @@
 package de.domisum.lib.hologrammenu.component;
 
-
 import de.domisum.lib.auxilium.data.container.math.LineSegment3D;
 import de.domisum.lib.auxilium.data.container.math.Vector3D;
 import de.domisum.lib.auxilium.util.math.VectorUtil;
+import de.domisum.lib.auxiliumspigot.data.container.VectorConverter;
 import de.domisum.lib.hologram.hologram.Hologram;
 import de.domisum.lib.hologram.hologram.TextHologram;
 import org.bukkit.entity.Player;
@@ -80,8 +80,8 @@ public class HologramMenuComponent
 
 	public boolean isPlayerLookingAt()
 	{
-		Vector3D playerEyeLocation = new Vector3D(this.player.getEyeLocation());
-		Vector3D lookDirection = new Vector3D(this.player.getLocation().getDirection());
+		Vector3D playerEyeLocation = VectorConverter.toVector3D(this.player.getEyeLocation());
+		Vector3D lookDirection = VectorConverter.toVector3D(this.player.getLocation().getDirection());
 		Vector3D playerLookLocation = playerEyeLocation.add(lookDirection.multiply(100));
 		LineSegment3D playerLookLineSegment = new LineSegment3D(playerEyeLocation, playerLookLocation);
 

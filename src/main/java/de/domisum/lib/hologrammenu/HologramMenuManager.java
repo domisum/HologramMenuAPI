@@ -1,6 +1,6 @@
 package de.domisum.lib.hologrammenu;
 
-import de.domisum.lib.auxilium.data.structure.pds.PlayerKeyMap;
+import de.domisum.lib.auxiliumspigot.data.structure.pds.PlayerKeyMap;
 import de.domisum.lib.hologrammenu.menu.HologramMenu;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;

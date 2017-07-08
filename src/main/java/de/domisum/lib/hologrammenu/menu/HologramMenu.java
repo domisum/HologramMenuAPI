@@ -1,9 +1,9 @@
 package de.domisum.lib.hologrammenu.menu;
 
-
 import de.domisum.lib.auxilium.data.container.math.Vector3D;
-import de.domisum.lib.auxilium.util.bukkit.LocationUtil;
 import de.domisum.lib.auxilium.util.math.VectorUtil;
+import de.domisum.lib.auxiliumspigot.data.container.VectorConverter;
+import de.domisum.lib.auxiliumspigot.util.LocationUtil;
 import de.domisum.lib.hologrammenu.HologramMenuLib;
 import de.domisum.lib.hologrammenu.component.HologramMenuComponent;
 import org.bukkit.Location;
@@ -125,8 +125,8 @@ public abstract class HologramMenu
 			Location componentLoc = base.clone().add(rotatedOffset.x, rotatedOffset.y, rotatedOffset.z);
 			Location viewLocation = viewLocationBase.clone().add(rotatedOffset.x, rotatedOffset.y, rotatedOffset.z);
 
-			entry.getKey().setLocation(new Vector3D(componentLoc));
-			entry.getKey().setViewLocation(new Vector3D(viewLocation));
+			entry.getKey().setLocation(VectorConverter.toVector3D(componentLoc));
+			entry.getKey().setViewLocation(VectorConverter.toVector3D(viewLocation));
 		}
 	}
 

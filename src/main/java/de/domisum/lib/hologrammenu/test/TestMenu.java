@@ -1,8 +1,7 @@
 package de.domisum.lib.hologrammenu.test;
 
-
 import de.domisum.lib.auxilium.data.container.math.Vector3D;
-import de.domisum.lib.auxilium.util.bukkit.ItemStackBuilder;
+import de.domisum.lib.auxiliumspigot.util.ItemStackBuilder;
 import de.domisum.lib.hologram.hologram.TextHologram;
 import de.domisum.lib.hologram.hologram.item.ItemHologram;
 import de.domisum.lib.hologrammenu.component.HologramMenuComponent;

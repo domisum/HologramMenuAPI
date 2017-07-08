@@ -1,9 +1,8 @@
 package de.domisum.lib.hologrammenu.menu;
 
-
-import de.domisum.lib.auxilium.util.bukkit.LocationUtil;
 import de.domisum.lib.auxilium.util.java.annotations.APIUsage;
 import de.domisum.lib.auxilium.util.math.MathUtil;
+import de.domisum.lib.auxiliumspigot.util.LocationUtil;
 import de.domisum.lib.hologrammenu.HologramMenuLib;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;

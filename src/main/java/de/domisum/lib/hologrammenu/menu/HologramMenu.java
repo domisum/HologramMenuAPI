@@ -133,7 +133,7 @@ public abstract class HologramMenu
 
 
 	// INTERACTION
-	void updateHover()
+	protected void updateHover()
 	{
 		if(this.hoveringComponent != null)
 			if(this.hoveringComponent.isPlayerLookingAt())

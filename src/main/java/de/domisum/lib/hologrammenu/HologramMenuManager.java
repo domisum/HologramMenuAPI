@@ -19,12 +19,12 @@ public class HologramMenuManager
 
 
 	// INIT
-	HologramMenuManager()
+	protected HologramMenuManager()
 	{
 
 	}
 
-	void terminate()
+	protected void terminate()
 	{
 		stopUpdateTask();
 
@@ -34,7 +34,7 @@ public class HologramMenuManager
 
 
 	// GETTERS
-	boolean hasMenu(Player player)
+	protected boolean hasMenu(Player player)
 	{
 		return this.activeMenus.containsKey(player);
 	}
@@ -89,7 +89,7 @@ public class HologramMenuManager
 
 
 	// PLAYER INTERACTION
-	void playerClick(Player player, boolean left)
+	protected void playerClick(Player player, boolean left)
 	{
 		HologramMenu menu = this.activeMenus.get(player);
 		menu.click(left);

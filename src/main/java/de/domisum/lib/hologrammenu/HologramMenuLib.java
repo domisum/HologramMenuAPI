@@ -18,7 +18,6 @@ public class HologramMenuLib
 	// INIT
 	private HologramMenuLib(Plugin plugin)
 	{
-		instance = this;
 		this.plugin = plugin;
 
 		onEnable();
@@ -29,7 +28,7 @@ public class HologramMenuLib
 		if(instance != null)
 			return;
 
-		new HologramMenuLib(plugin);
+		instance = new HologramMenuLib(plugin);
 	}
 
 	@APIUsage public static void disable()

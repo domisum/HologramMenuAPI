@@ -1,7 +1,7 @@
 package de.domisum.lib.hologrammenu.menu;
 
 import de.domisum.lib.auxilium.data.container.math.Vector3D;
-import de.domisum.lib.auxilium.util.java.annotations.APIUsage;
+import de.domisum.lib.auxilium.util.java.annotations.API;
 import de.domisum.lib.auxilium.util.math.VectorUtil;
 import de.domisum.lib.auxiliumspigot.data.container.VectorConverter;
 import de.domisum.lib.auxiliumspigot.util.LocationUtil;
@@ -172,7 +172,7 @@ public abstract class HologramMenu
 		this.hoveringComponent.onClick();
 	}
 
-	@APIUsage protected void onRightClick()
+	@API protected void onRightClick()
 	{
 		// to be overridden
 	}

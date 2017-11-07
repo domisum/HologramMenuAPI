@@ -1,13 +1,13 @@
 package de.domisum.lib.hologrammenu.menu;
 
-import de.domisum.lib.auxilium.util.java.annotations.APIUsage;
+import de.domisum.lib.auxilium.util.java.annotations.API;
 import de.domisum.lib.auxilium.util.math.MathUtil;
 import de.domisum.lib.auxiliumspigot.util.LocationUtil;
 import de.domisum.lib.hologrammenu.HologramMenuLib;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
-@APIUsage
+@API
 public abstract class PlayerCenteredHologramMenu extends HologramMenu
 {
 
@@ -20,7 +20,7 @@ public abstract class PlayerCenteredHologramMenu extends HologramMenu
 
 
 	// INIT
-	@APIUsage public PlayerCenteredHologramMenu(Player player)
+	@API public PlayerCenteredHologramMenu(Player player)
 	{
 		super(player, player.getLocation());
 	}
@@ -40,12 +40,12 @@ public abstract class PlayerCenteredHologramMenu extends HologramMenu
 
 
 	// SETTERS
-	@APIUsage public void setBaseDistance(double baseDistance)
+	@API public void setBaseDistance(double baseDistance)
 	{
 		this.baseDistance = baseDistance;
 	}
 
-	@APIUsage public void setBaseHeight(double baseHeight)
+	@API public void setBaseHeight(double baseHeight)
 	{
 		this.baseHeight = baseHeight;
 	}

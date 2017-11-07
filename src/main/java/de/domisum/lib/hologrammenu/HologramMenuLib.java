@@ -1,6 +1,6 @@
 package de.domisum.lib.hologrammenu;
 
-import de.domisum.lib.auxilium.util.java.annotations.APIUsage;
+import de.domisum.lib.auxilium.util.java.annotations.API;
 import org.bukkit.plugin.Plugin;
 
 import java.util.logging.Logger;
@@ -23,7 +23,7 @@ public class HologramMenuLib
 		onEnable();
 	}
 
-	@APIUsage public static void enable(Plugin plugin)
+	@API public static void enable(Plugin plugin)
 	{
 		if(instance != null)
 			return;
@@ -31,7 +31,7 @@ public class HologramMenuLib
 		instance = new HologramMenuLib(plugin);
 	}
 
-	@APIUsage public static void disable()
+	@API public static void disable()
 	{
 		if(instance == null)
 			return;
@@ -59,7 +59,7 @@ public class HologramMenuLib
 
 
 	// GETTERS
-	@APIUsage public static HologramMenuLib getInstance()
+	@API public static HologramMenuLib getInstance()
 	{
 		if(instance == null)
 			throw new IllegalArgumentException(HologramMenuLib.class.getSimpleName()+" has to be initialized before usage");
@@ -67,7 +67,7 @@ public class HologramMenuLib
 		return instance;
 	}
 
-	@APIUsage public static Plugin getPlugin()
+	@API public static Plugin getPlugin()
 	{
 		return getInstance().plugin;
 	}
@@ -77,7 +77,7 @@ public class HologramMenuLib
 		return getInstance().hologramMenuManager;
 	}
 
-	@APIUsage public Logger getLogger()
+	@API public Logger getLogger()
 	{
 		return getInstance().plugin.getLogger();
 	}

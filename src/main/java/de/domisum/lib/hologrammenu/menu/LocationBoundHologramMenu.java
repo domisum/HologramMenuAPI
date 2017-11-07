@@ -1,10 +1,10 @@
 package de.domisum.lib.hologrammenu.menu;
 
-import de.domisum.lib.auxilium.util.java.annotations.APIUsage;
+import de.domisum.lib.auxilium.util.java.annotations.API;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
-@APIUsage
+@API
 public class LocationBoundHologramMenu extends HologramMenu
 {
 
@@ -16,7 +16,7 @@ public class LocationBoundHologramMenu extends HologramMenu
 
 
 	// SETTERS
-	@APIUsage public void setLocation(Location location)
+	@API public void setLocation(Location location)
 	{
 		updateLocation(location);
 	}

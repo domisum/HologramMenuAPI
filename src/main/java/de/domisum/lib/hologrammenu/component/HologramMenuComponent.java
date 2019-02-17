@@ -8,11 +8,11 @@ import de.domisum.lib.hologram.hologram.Hologram;
 import de.domisum.lib.hologram.hologram.TextHologram;
 import org.bukkit.entity.Player;
 
-public class HologramMenuComponent
+public class HologramMenuComponent<T extends Hologram>
 {
 
 	// REFERENCES
-	protected Hologram hologram;
+	protected T hologram;
 	protected Player player;
 
 	// STATUS
@@ -20,32 +20,32 @@ public class HologramMenuComponent
 
 
 	// INIT
-	public HologramMenuComponent(Hologram hologram)
+	public HologramMenuComponent(T hologram)
 	{
 		this.hologram = hologram;
 	}
 
 	public String toString()
 	{
-		return "hmc["+this.hologram.getClass().getSimpleName()+"]";
+		return "hmc["+hologram.getClass().getSimpleName()+"]";
 	}
 
 	public void initialize(Player player)
 	{
 		this.player = player;
-		this.hologram.setWorld(player.getWorld());
+		hologram.setWorld(player.getWorld());
 	}
 
 
 	// VISIBILITY
 	public void show()
 	{
-		this.hologram.showTo(this.player);
+		hologram.showTo(player);
 	}
 
 	public void hide()
 	{
-		this.hologram.hideFrom(this.player);
+		hologram.hideFrom(player);
 	}
 
 
@@ -53,12 +53,12 @@ public class HologramMenuComponent
 	public void setLocation(Vector3D location)
 	{
 		this.location = location;
-		this.hologram.setLocation(this.location);
+		hologram.setLocation(this.location);
 	}
 
 	public void setViewLocation(Vector3D viewLocation)
 	{
-		this.hologram.setViewLocation(viewLocation);
+		hologram.setViewLocation(viewLocation);
 	}
 
 
@@ -80,20 +80,20 @@ public class HologramMenuComponent
 
 	public boolean isPlayerLookingAt()
 	{
-		Vector3D playerEyeLocation = VectorConverter.toVector3D(this.player.getEyeLocation());
-		Vector3D lookDirection = VectorConverter.toVector3D(this.player.getLocation().getDirection());
+		Vector3D playerEyeLocation = VectorConverter.toVector3D(player.getEyeLocation());
+		Vector3D lookDirection = VectorConverter.toVector3D(player.getLocation().getDirection());
 		Vector3D playerLookLocation = playerEyeLocation.add(lookDirection.multiply(100));
 		LineSegment3D playerLookLineSegment = new LineSegment3D(playerEyeLocation, playerLookLocation);
 
-		if(this.hologram instanceof TextHologram)
+		if(hologram instanceof TextHologram)
 		{
-			TextHologram textHologram = (TextHologram) this.hologram;
+			TextHologram textHologram = (TextHologram) hologram;
 			LineSegment3D hologramLineSegment = getTextHologramLineSegment(textHologram);
 
 			return playerLookLineSegment.getDistanceTo(hologramLineSegment) < 0.15;
 		}
 
-		return playerLookLineSegment.getDistanceTo(this.location) < 0.25;
+		return playerLookLineSegment.getDistanceTo(location) < 0.25;
 	}
 
 
@@ -109,10 +109,10 @@ public class HologramMenuComponent
 
 		// the text hologram's rotation actually just depends on the player's yaw, since it is always parallel to the screen,
 		// so just use the player yaw for the rotation
-		double rotationYaw = -this.player.getLocation().getYaw();
+		double rotationYaw = -player.getLocation().getYaw();
 		Vector3D rotatedOffset = VectorUtil.rotateOnXZPlane(offset, rotationYaw);
 
-		return new LineSegment3D(this.location.add(rotatedOffset.invert()), this.location.add(rotatedOffset));
+		return new LineSegment3D(location.add(rotatedOffset.invert()), location.add(rotatedOffset));
 	}
 
 }

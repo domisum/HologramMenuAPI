@@ -10,7 +10,7 @@ public class HologramMenuLib
 
 	// REFERENCES
 	private static HologramMenuLib instance;
-	private Plugin plugin;
+	private final Plugin plugin;
 
 	private HologramMenuManager hologramMenuManager;
 
@@ -19,19 +19,20 @@ public class HologramMenuLib
 	private HologramMenuLib(Plugin plugin)
 	{
 		this.plugin = plugin;
-
-		onEnable();
 	}
 
-	@API public static void enable(Plugin plugin)
+	@API
+	public static void enable(Plugin plugin)
 	{
 		if(instance != null)
 			return;
 
 		instance = new HologramMenuLib(plugin);
+		instance.onEnable();
 	}
 
-	@API public static void disable()
+	@API
+	public static void disable()
 	{
 		if(instance == null)
 			return;
@@ -43,23 +44,23 @@ public class HologramMenuLib
 
 	private void onEnable()
 	{
-		this.hologramMenuManager = new HologramMenuManager();
+		hologramMenuManager = new HologramMenuManager();
 
 		new PlayerMovementListener();
-
-		getLogger().info(this.getClass().getSimpleName()+" has been enabled");
+		getLogger().info(getClass().getSimpleName()+" has been enabled");
 	}
 
 	private void onDisable()
 	{
-		this.hologramMenuManager.terminate();
+		hologramMenuManager.terminate();
 
-		getLogger().info(this.getClass().getSimpleName()+" has been disabled");
+		getLogger().info(getClass().getSimpleName()+" has been disabled");
 	}
 
 
 	// GETTERS
-	@API public static HologramMenuLib getInstance()
+	@API
+	public static HologramMenuLib getInstance()
 	{
 		if(instance == null)
 			throw new IllegalArgumentException(HologramMenuLib.class.getSimpleName()+" has to be initialized before usage");
@@ -67,7 +68,8 @@ public class HologramMenuLib
 		return instance;
 	}
 
-	@API public static Plugin getPlugin()
+	@API
+	public static Plugin getPlugin()
 	{
 		return getInstance().plugin;
 	}
@@ -77,7 +79,8 @@ public class HologramMenuLib
 		return getInstance().hologramMenuManager;
 	}
 
-	@API public Logger getLogger()
+	@API
+	public Logger getLogger()
 	{
 		return getInstance().plugin.getLogger();
 	}
